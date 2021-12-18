@@ -1,6 +1,5 @@
 ﻿
-# Student name: Anthony  Daher et Tony Chamoun
-# Numéros étudiants: 300233710 et 300238262
+# Student name: Anthony  Daher
 # Question 2 - Devoir 5
 # Completer les fonctions si dessous pour jouer tic-tac-toe
 
