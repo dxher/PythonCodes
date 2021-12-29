@@ -1,19 +1,35 @@
+import time
+
 from selenium import webdriver
 
+# opens tab on Google Chrome
 driver = webdriver.Chrome()
 
-url = "https://www.bestbuy.ca/en-ca/product/nvidia-geforce-rtx-3080-10gb-gddr6x-video-card/15463567"
-
+# open the store you want
+url = "https://www.footlocker.ca/en/product/new-balance-m5740-v1-mens/56651695.html"
 driver.get(url)
 
-click = driver.find_element_by_xpath('//*[@id="test"]/button')
+# while the size button isnt available
+buttonAvailable = False
+while not buttonAvailable:
 
-click.click()
+    #path to the size button
+    sizeButton = driver.find_element_by_xpath('//*[@id="ProductDetails"]/div[4]/div[4]/fieldset/div/div[8]')
 
-cart = driver.find_element_by_xpath('//*[@id="cartIcon"]/div[1]/a')
+    #if the button size button isnt clickable
+    if ("c-form-field--disabled" in sizeButton.get_attribute("class")):
 
-cart.click()
+        #wait one second to refresh the page
+        time.sleep(1)
+        driver.refresh()
 
-checkout = driver.find_element_by_xpath('//*[@id="root"]/div/div[4]/div[2]/div/section/div/main/section/section[2]/div[3]/div/a/span')
+    # if it is available exit the loop
+    else:
+        buttonAvailable = True
 
-checkout.click()
+#click the wanted size
+sizeButton.click()
+
+#click the add to cart button
+cartButton = driver.find_element_by_xpath('//*[@id="ProductDetails"]/ul/li[3]/button')
+cartButton.click()
